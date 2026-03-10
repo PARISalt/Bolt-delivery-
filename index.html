@@ -22,7 +22,7 @@
 </head>
 <body class="bg-zinc-950 text-zinc-200">
 
-    <!-- VISITOR NAV + HERO (same premium look) -->
+    <!-- NAV -->
     <nav class="border-b border-zinc-800 bg-zinc-950 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
             <div class="flex items-center gap-x-3">
@@ -31,14 +31,14 @@
             </div>
             <div class="flex gap-x-8 text-sm font-medium">
                 <a onclick="document.getElementById('track-input').focus()" class="hover:text-yellow-400">Track</a>
-                <a href="#cost" class="hover:text-yellow-400">Get Quote</a>
+                <a href="#quote" class="hover:text-yellow-400">Get Quote</a>
                 <a href="#services" class="hover:text-yellow-400">Services</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO + TRACK -->
-    <header class="bg-gradient-to-br from-zinc-900 to-black py-20 text-center">
+    <!-- HERO -->
+    <header class="bg-gradient-to-br from-zinc-900 to-black py-20 text-center fade-in">
         <h2 class="text-6xl font-bold tracking-tighter mb-6">Lightning Fast.<br>Reliable Delivery.</h2>
         <div class="max-w-lg mx-auto px-6">
             <div class="bg-zinc-900 border border-zinc-700 rounded-3xl p-2 flex">
@@ -48,8 +48,8 @@
         </div>
     </header>
 
-    <!-- COST ESTIMATOR (new premium feature) -->
-    <section id="cost" class="max-w-7xl mx-auto px-6 py-12 bg-zinc-900">
+    <!-- INSTANT QUOTE -->
+    <section id="quote" class="max-w-7xl mx-auto px-6 py-12 bg-zinc-900">
         <h3 class="font-semibold text-xl mb-6 text-center">Instant Delivery Quote</h3>
         <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
             <input id="quote-from" placeholder="From" class="bg-zinc-800 p-4 rounded-2xl">
@@ -59,10 +59,47 @@
         <div id="quote-result" class="mt-6 text-center font-medium text-emerald-400"></div>
     </section>
 
-    <!-- SERVICES + FOOTER (same) -->
-    <!-- ... (kept short for mobile) ... -->
+    <!-- SERVICES -->
+    <section id="services" class="max-w-7xl mx-auto px-6 py-20">
+        <h3 class="text-4xl font-bold text-center mb-12">Our Services</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="card-hover bg-zinc-900 p-8 rounded-3xl border border-zinc-700">
+                <i class="fa-solid fa-truck text-5xl text-yellow-400 mb-6"></i>
+                <h4 class="text-2xl font-semibold">Road Express</h4>
+                <p class="text-zinc-400 mt-3">24-48 hours door-to-door across Cameroon</p>
+            </div>
+            <div class="card-hover bg-zinc-900 p-8 rounded-3xl border border-zinc-700">
+                <i class="fa-solid fa-plane text-5xl text-yellow-400 mb-6"></i>
+                <h4 class="text-2xl font-semibold">Air Cargo</h4>
+                <p class="text-zinc-400 mt-3">Same-day urgent delivery</p>
+            </div>
+            <div class="card-hover bg-zinc-900 p-8 rounded-3xl border border-zinc-700">
+                <i class="fa-solid fa-clock text-5xl text-yellow-400 mb-6"></i>
+                <h4 class="text-2xl font-semibold">Same-Day City</h4>
+                <p class="text-zinc-400 mt-3">Under 4 hours in major cities</p>
+            </div>
+        </div>
+    </section>
 
-    <!-- TRACKING MODAL (map now loads FAST) -->
+    <!-- TESTIMONIALS (REVIEWS) -->
+    <section class="bg-zinc-900 py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h3 class="text-4xl font-bold text-center mb-12">What Our Customers Say</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-zinc-950 p-8 rounded-3xl">"Bolt's live tracking is insane — I watched my package move from Bamenda to Douala!" <span class="block mt-6 text-yellow-400">- Marie T., Business Owner</span></div>
+                <div class="bg-zinc-950 p-8 rounded-3xl">"Best logistics in Cameroon. Staff portal saves me hours every day." <span class="block mt-6 text-yellow-400">- Jean P., Yaoundé</span></div>
+                <div class="bg-zinc-950 p-8 rounded-3xl">"Package arrived early with perfect updates. 10/10." <span class="block mt-6 text-yellow-400">- Amina K., Douala</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-12 text-center text-xs text-zinc-500">
+        © 2026 Bolt Delivery • Bamenda, Cameroon<br>
+        <span onclick="staffLogin()" class="cursor-pointer hover:text-yellow-400 transition">Staff Login</span>
+    </footer>
+
+    <!-- TRACKING MODAL (instant map) -->
     <div id="tracking-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[100]">
         <div class="bg-zinc-900 w-full max-w-4xl mx-4 rounded-3xl overflow-hidden">
             <div class="p-6 border-b flex justify-between">
@@ -70,10 +107,7 @@
                 <button onclick="closeModal()" class="text-4xl">×</button>
             </div>
             <div class="p-8">
-                <!-- MAP LOADING STATE -->
-                <div id="map-loading" class="h-[380px] flex items-center justify-center bg-zinc-950 rounded-3xl text-yellow-400">
-                    Loading live map...
-                </div>
+                <div id="map-loading" class="h-[380px] flex items-center justify-center bg-zinc-950 rounded-3xl text-yellow-400">Loading live map...</div>
                 <div id="modal-map" class="hidden h-[380px]"></div>
 
                 <div class="flex items-center gap-4 my-6">
@@ -92,93 +126,153 @@
         </div>
     </div>
 
-    <!-- ADMIN VIEW (same password) -->
-    <!-- ... (kept the same realistic form + list) ... -->
+    <!-- ADMIN VIEW -->
+    <div id="admin-view" class="hidden min-h-screen bg-zinc-950">
+        <div class="max-w-7xl mx-auto p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold flex items-center gap-3"><i class="fa-solid fa-shield-halved text-yellow-400"></i> Staff Dashboard</h2>
+                <button onclick="logout()" class="bg-red-500/20 text-red-400 px-6 py-3 rounded-2xl font-medium">Logout</button>
+            </div>
+            <!-- New Shipment Form (full) -->
+            <div class="bg-zinc-900 rounded-3xl p-8 mb-12">
+                <h3 class="font-semibold text-xl mb-6">Create New Shipment</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input id="client-name" placeholder="Client Full Name" class="bg-zinc-800 p-4 rounded-2xl">
+                    <input id="client-phone" placeholder="Phone Number" class="bg-zinc-800 p-4 rounded-2xl">
+                    <input id="from-addr" placeholder="Pickup Address" class="bg-zinc-800 p-4 rounded-2xl">
+                    <input id="to-addr" placeholder="Delivery Address" class="bg-zinc-800 p-4 rounded-2xl">
+                    <input id="weight" type="number" placeholder="Weight (kg)" class="bg-zinc-800 p-4 rounded-2xl">
+                    <input id="content" placeholder="Package Content" class="bg-zinc-800 p-4 rounded-2xl">
+                    <input id="pickup-time" type="datetime-local" class="bg-zinc-800 p-4 rounded-2xl">
+                    <input id="eta-time" type="datetime-local" class="bg-zinc-800 p-4 rounded-2xl">
+                </div>
+                <button onclick="createShipment()" class="mt-8 w-full bg-yellow-400 hover:bg-yellow-300 text-zinc-950 py-5 rounded-3xl font-bold text-lg">Generate Tracking Code & Save</button>
+            </div>
+            <div>
+                <h3 class="font-semibold text-xl mb-6">All Shipments</h3>
+                <div id="package-list" class="space-y-4"></div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Full working code with all fixes (map now instant on Pixel 2)
         let packages = [];
         let currentMap = null;
         let simulationInterval = null;
         let currentPkgIndex = null;
         const ADMIN_PASS = "BoltSecure2026CM";
 
-        function loadData() { /* same */ }
-        function saveData() { /* same */ }
+        function loadData() {
+            if (localStorage.getItem('boltPackages')) packages = JSON.parse(localStorage.getItem('boltPackages'));
+        }
+        function saveData() {
+            localStorage.setItem('boltPackages', JSON.stringify(packages));
+        }
 
-        function staffLogin() { /* same */ }
-        function logout() { /* same */ }
-        function createShipment() { /* same full form */ }
-        function renderPackageList() { /* same */ }
+        function staffLogin() {
+            const pass = prompt("Enter Staff Password:");
+            if (pass === ADMIN_PASS) {
+                document.getElementById('admin-view').classList.remove('hidden');
+                renderPackageList();
+            } else alert("Incorrect password");
+        }
+
+        function logout() {
+            document.getElementById('admin-view').classList.add('hidden');
+        }
+
+        function createShipment() { /* full form logic - same as before */ 
+            const name = document.getElementById('client-name').value.trim();
+            if (!name) return alert("Please fill all fields");
+            const code = "BD-" + Math.floor(100000 + Math.random() * 900000);
+            packages.push({
+                trackingId: code,
+                clientName: name,
+                from: document.getElementById('from-addr').value || "Bamenda",
+                to: document.getElementById('to-addr').value || "Douala",
+                weight: document.getElementById('weight').value || "5",
+                content: document.getElementById('content').value || "Package",
+                progress: 15,
+                currentLat: 5.45,
+                currentLng: 9.95,
+                status: "Processing"
+            });
+            saveData();
+            alert(`✅ Tracking code: ${code}`);
+            renderPackageList();
+        }
+
+        function renderPackageList() { /* same as before */ 
+            let html = '';
+            packages.forEach((p, i) => {
+                html += `<div class="bg-zinc-900 p-6 rounded-3xl flex justify-between"><div><strong>\( {p.trackingId}</strong><br> \){p.clientName}</div><button onclick="editPackage(${i})" class="text-yellow-400">Edit</button></div>`;
+            });
+            document.getElementById('package-list').innerHTML = html || 'No shipments yet';
+        }
+
+        function editPackage(i) {
+            const prog = prompt("New progress %:", packages[i].progress);
+            if (prog) {
+                packages[i].progress = parseInt(prog);
+                saveData();
+                renderPackageList();
+            }
+        }
 
         function quickTrack() {
             const input = document.getElementById('track-input').value.trim().toUpperCase();
-            const pkgIndex = packages.findIndex(p => p.trackingId === input);
-            if (pkgIndex === -1) return alert("Code not found.");
+            const idx = packages.findIndex(p => p.trackingId === input);
+            if (idx === -1) return alert("Code not found. Use one you generated in Staff Portal.");
 
-            currentPkgIndex = pkgIndex;
-            const pkg = packages[pkgIndex];
+            currentPkgIndex = idx;
+            const pkg = packages[idx];
 
             document.getElementById('tracking-modal').classList.remove('hidden');
             document.getElementById('modal-id').textContent = pkg.trackingId;
             document.getElementById('modal-progress').style.width = pkg.progress + '%';
             document.getElementById('modal-progress-text').textContent = pkg.progress + '%';
 
-            // SHOW LOADING FIRST
             document.getElementById('map-loading').classList.remove('hidden');
             document.getElementById('modal-map').classList.add('hidden');
 
-            // MAP CREATION WITH FIX FOR MOBILE
             setTimeout(() => {
                 if (currentMap) currentMap.remove();
                 currentMap = L.map('modal-map').setView([pkg.currentLat, pkg.currentLng], 12);
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(currentMap);
-                
-                const truckIcon = L.divIcon({className: 'truck-icon', html: '🚚', iconSize: [32,32]});
-                L.marker([pkg.currentLat, pkg.currentLng], {icon: truckIcon}).addTo(currentMap);
+                const truck = L.divIcon({html: '🚚', className: 'truck-icon', iconSize: [32,32]});
+                L.marker([pkg.currentLat, pkg.currentLng], {icon: truck}).addTo(currentMap);
 
-                // MOBILE FIX
                 currentMap.invalidateSize();
                 document.getElementById('map-loading').classList.add('hidden');
                 document.getElementById('modal-map').classList.remove('hidden');
-            }, 300);
-
-            // details HTML (same)
+            }, 280);
         }
 
         function startLiveSimulation() {
             if (currentPkgIndex === null) return;
             const pkg = packages[currentPkgIndex];
             let step = 0;
-            const steps = 10;
-
             if (simulationInterval) clearInterval(simulationInterval);
-
             simulationInterval = setInterval(() => {
                 step++;
-                pkg.progress = Math.min(100, pkg.progress + Math.floor(85 / steps));
+                pkg.progress = Math.min(100, pkg.progress + 9);
                 pkg.currentLat -= 0.028;
                 pkg.currentLng -= 0.018;
-
                 if (currentMap) {
-                    currentMap.flyTo([pkg.currentLat, pkg.currentLng], 13, {duration: 1.2});
+                    currentMap.flyTo([pkg.currentLat, pkg.currentLng], 13, {duration: 1});
                     currentMap.eachLayer(l => { if (l instanceof L.Marker) l.setLatLng([pkg.currentLat, pkg.currentLng]); });
                 }
-
                 document.getElementById('modal-progress').style.width = pkg.progress + '%';
                 document.getElementById('modal-progress-text').textContent = pkg.progress + '%';
-
-                if (step >= steps) {
+                if (step >= 10) {
                     clearInterval(simulationInterval);
                     pkg.status = "Delivered";
                     saveData();
                 }
-            }, 900); // FASTER!
+            }, 900);
         }
 
         function getQuote() {
-            const from = document.getElementById('quote-from').value || "Bamenda";
-            const to = document.getElementById('quote-to').value || "Douala";
             const price = Math.floor(Math.random() * 12000) + 4500;
             document.getElementById('quote-result').innerHTML = `✅ Estimated cost: <span class="text-2xl font-bold text-yellow-400">XAF ${price.toLocaleString()}</span>`;
         }
@@ -191,19 +285,20 @@
 
         window.onload = () => {
             loadData();
-            // sample package so you can test immediately
             if (packages.length === 0) {
-                packages.push({trackingId: "BD-135792", clientName: "Paris junior", from: "Mile 2 Nkwen", to: "Buea", weight: "90", content: "Dog", progress: 15, currentLat: 5.45, currentLng: 9.95, status: "Processing"});
+                packages = [{trackingId: "BD-135792", clientName: "Paris junior", from: "Mile 2 Nkwen", to: "Buea", weight: "90", content: "Dog", progress: 15, currentLat: 5.45, currentLng: 9.95, status: "Processing"}];
                 saveData();
             }
         };
 
+        window.staffLogin = staffLogin;
+        window.logout = logout;
+        window.createShipment = createShipment;
         window.quickTrack = quickTrack;
         window.startLiveSimulation = startLiveSimulation;
         window.getQuote = getQuote;
         window.closeModal = closeModal;
-        window.staffLogin = staffLogin;
-        // ... other functions same
+        window.editPackage = editPackage;
     </script>
 </body>
     </html>
